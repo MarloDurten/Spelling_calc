@@ -1,8 +1,9 @@
-
 vocabulary = {'один':"1",'два':"2",'три':"3",
              'четыре':"4",'пять':"5",'шесть':"6",
              'семь':"7",'восемь':"8",'девять':"9",
              'ноль':"0",}
+
+
 
 verb_form_num = vocabulary.keys()
 
@@ -13,37 +14,28 @@ input_massege = input_massege.lower()
 input_massege_splited = input_massege.split()
 
 
-expr = ''
 
-for word in input_massege_splited:
-    if word in verb_form_num:
-        expr += vocabulary.get(word)
-    elif word in verb_form_signs:
-        if word == 'плюс':
-            expr += '+'
-        else:
-            expr +='-'
-    else:
-        pass
+def resolve(input):
+    expr= ''
+    global verb_form_num
+    global verb_form_signs
 
-result = eval(expr)
-print(result)
+    for word in input: # проверка на число
+        if word in verb_form_num:
+            expr += vocabulary.get(word)
 
-# result=0
-# q = 0
-# stete = None
-# for word in input_massege_splited:
-#     if word in verb_form_num:
-#         q = vocabulary.get(word)
-#     elif word in verb_form_signs:
-#         if word == 'плюс':
-#             result += q
-#             q = 0
-#         elif word == 'минус':
-#             result -= q
-#     else:
-#         pass
+        elif word in verb_form_signs: # проверка на знак, если да то какой
+            if word == 'плюс':
+                expr += '+'
 
+            else:
+                expr +='-'
 
+        else:                       # Пропуск если гойда 
+            pass
+
+    return expr
+
+print(resolve(input_massege_splited))
 
 
